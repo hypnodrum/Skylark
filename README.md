@@ -2,7 +2,7 @@
  a music site to share your electronic creations with the World!
 
 This is a project for my Final Exam at SotUni Software University.
-It's about a site where DJ and Producers may share thir electronic creations to the World.
+It's about a site where DJs and Producers may share thir electronic creations to the World.
 
 <h3>Some screenshots from the project:</h3>
 
