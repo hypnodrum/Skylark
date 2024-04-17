@@ -7,10 +7,10 @@ It's about a site where DJ and Producers may share thir electronic creations to 
 <h3>Some screenshots from the project:</h3>
 
 <h3>1. Home screen:</h3>
-<img alt="Home screen" src="https://i.ibb.co/2SqGMGD/home.png" align="center"/>
+<img alt="Home screen" src="https://i.postimg.cc/Z9nzZ1Dr/home.png" align="center"/>
 <h3>2. Login screen:</h3>
-<img alt="Login screen" src="https://i.ibb.co/HNvKG7T/login.png" align="center"/>
+<img alt="Login screen" src="https://i.postimg.cc/bZzjVGxV/login.png" align="center"/>
 <h3>2. Dashboard:</h3>
-<img alt="Dashboard screen" src="https://i.ibb.co/4Vkg3GF/dashboard.png" align="center"/>
+<img alt="Dashboard screen" src="https://i.postimg.cc/PPbjMbw8/dashboard.png" align="center"/>
 <h3>3. User Profile:</h3>
-<img alt="User Details screen" src="https://i.ibb.co/Jz4K2yH/user-details.png" align="center"/>
+<img alt="User Details screen" src="https://i.postimg.cc/fVBQGw5z/user-details.png" align="center"/>
