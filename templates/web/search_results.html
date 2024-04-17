@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main_content %}
+<body>
+    <h1 align="center">Search Results</h1><br>
+    <form method="get">
+        {{ form.as_p }}
+    </form>
+    <ul>
+        {% for track in results %}
+            <!-- Generate link to track_details page -->
+            <div class="container">
+                <li>
+                    <h2><a href="{% url 'track_details' pk=track.pk %}" target="_blank">{{ track.title }}</a></h2>
+                </li>
+            </div>
+        {% empty %}
+            <li>No results found</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <div class="button-99">
+        <a href="#" onclick="history.go(-1)"><- Go Back</a>
+        <p class="top">Didn't find it?</p>
+        <p class="bottom">Try again</p>
+    </div>
+    <br>
+</body>
+{% endblock %}
+

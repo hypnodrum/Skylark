@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Skylark</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <!-- style css -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="{% static 'css/responsive.css'%}">
+    <!-- fevicon -->
+    <link rel="icon" href="{% static 'images/favicon-32x32.png'%}" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css'%}">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <!-- Music player -->
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      -->
+
+</head>
+<!-- body -->
+
+<body class="main-layout">
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="{% static 'images/loading.gif'%}" alt="#" /></div>
+    </div>
+    <!-- end loader -->
+    <!-- header -->
+    <header>
+        <!-- header inner -->
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col logo_section">
+                        <div class="full">
+                            <div class="center-desk">
+                                <div class="logo">
+                                    <a href="{% url 'index' %}"><img src="{% static 'images/logos/skylark_logo_2.png'%}" alt="logo"  /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-8 col-md-10 col-sm-10">
+                        <div class="menu-area">
+                            <div class="limit-box">
+                                <nav class="main-menu">
+                                    <ul class="menu-area-main">
+                                        {% if request.user.is_authenticated %}
+                                            <li class="active"> <a href="{% url 'index' %}">Home</a> </li>
+                                            <li> <a href="{% url 'about' %}">about</a> </li>
+                                            <li> <a href="{% url 'contact' %}">Contact</a> </li>
+                                            <li title="Catalogue"> <a href="{% url 'catalogue' pk=user.pk%}"><img src="{%static 'icon/catalogue.png' %}" alt="Catalogie" width="50"></a> </li>
+                                            <li title="Upload track"> <a href="{% url 'upload_track' pk=user.pk %}"><img src="{%static 'icon/upload.png' %}" alt="Upload" width="50"/></a> </li>
+                                                {% if user.skylarkuser.profile_picture %}
+                                                    <li title="Change your profile"> <a href="{% url 'details_profile' %}"><img src="{{ user.skylarkuser.profile_picture }}" alt="profile details" width="50"/></a> </li>
+                                                {% else %}
+                                                    <li title="Change your profile. You might won't to insert an avatar?"> <a href="{% url 'details_profile' %}"><img src="{%static 'icon/default_user.jpg' %}" alt="profile details" width="50"/></a> </li>
+                                                {% endif %}
+                                            <li title = "logout"> <a href="{% url 'logout' %}"><img src="{%static 'icon/logout.png' %}" alt="logout" width="40"/></a> </li>
+                                        {% else %}
+                                            <li class="active"> <a href="{% url 'index' %}">Home</a> </li>
+                                            <li> <a href="{% url 'about' %}">about</a> </li>
+                                            <li> <a href="{% url 'contact' %}">Contact</a> </li>
+                                            <li> <a href="{% url 'create_profile' %}">Register</a> </li>
+                                            <li> <a href="{% url 'login' %}">Login</a> </li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+    <form class="search" action="{% url 'search' %}" method="get">
+        <div class="input-group">
+            <input class="form-control" type="text" name="query" placeholder="Search">
+            <button class="btn btn-outline-secondary" type="submit">
+                <img src="{% static 'images/search_icon.png' %}" alt="Search">
+            </button>
+        </div>
+    </form>
+</div>
+                </div>
+            </div>
+        </div>    <!-- end header inner -->
+    </header>
+    <!-- end header -->
+    {% block main_content %}
+
+    {% endblock %}
+    <!--  footer -->
+    <footer id="footer_with_contact">
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12 width">
+                        <div class="address">
+                            <h3>Contact Us</h3>
+                            <ul class="locarion_icon">
+                                <li><img src="{% static 'icon/1.png' %}" alt="icon" />27 Shipka, Plovdiv, Bulgaria</li>
+                                <li><img src="{% static 'icon/2.png' %}" alt="icon" />Phone : ( +359 882 508754 )</li>
+                                <li><img src="{% static 'icon/3.png' %}" alt="icon" />Email : hypnodrum@gmail.com</li>
+
+                            </ul>
+
+                            <ul class="contant_icon">
+                                <a href="http://facebook.com/hypnodrum">
+                                  <img src="{% static 'icon/fb.png' %}" alt="icon" />
+                                </a>
+                                <a href="http://x.com/hypnodrum">
+                                  <img src="{% static 'icon/tw.png' %}" alt="icon" />
+                                </a>
+                                <a href="https://www.linkedin.com/in/ivan-vasilev-54aa7229">
+                                  <img src="{% static 'icon/lin(2).png' %}" alt="icon" />
+                                </a>
+                                <a href="https://www.instagram.com/hypnodrum/">
+                                  <img src="{% static 'icon/instagram.png' %}" alt="icon" />
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 width">
+                        <div class="address">
+                            <h3>Get In Touch</h3>
+                            <form>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <input class="contactus" placeholder="Name" type="text" name="Name">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <input class="contactus" placeholder="Phone" type="text" name="Email">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <input class="contactus" placeholder="Email" type="text" name="Email">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <textarea class="textarea" placeholder="Message" type="text" name="Message"></textarea>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button class="send">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 width">
+                        <div class="address">
+                            <h3>New Music </h3>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
+                                    <figure><img src="{% static 'images/music1.jpg' %}" alt="" /></figure>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
+                                    <figure><img src="{% static 'images/music2.jpg' %}" alt=""/></figure>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
+                                    <figure><img src="{% static 'images/music3.jpg' %}" alt=""/></figure>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 ">
+                                    <figure><img src="{% static 'images/music4.jpg' %}" alt=""/></figure>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 All Rights Reserved. <a href="https://facebook.com/hypnodrum">Hypnodrum</a></p>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+    <!-- Javascript files-->
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'js/jquery-3.0.0.min.js'%}"></script>
+    <script src="{% static 'js/plugin.js'%}"></script>
+    <script src="{% static '/js/main.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- sidebar -->
+    <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+    <script src="{% static 'js/custom.js'%}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".fancybox").fancybox({
+                openEffect: "none",
+                closeEffect: "none"
+            });
+
+            $(".zoom").hover(function() {
+
+                $(this).addClass('transition');
+            }, function() {
+
+                $(this).removeClass('transition');
+            });
+        });
+    </script>
+</body>
+
+</html>

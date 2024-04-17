@@ -1,0 +1,120 @@
+.auth-form {
+  width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark background color with some transparency */
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the image */
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1); /* Add a subtle shadow effect */
+  transition: box-shadow 0.3s ease; /* Smooth transition for the shadow */
+}
+
+.auth-form:hover {
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2); /* Darker shadow on hover */
+}
+
+.auth-form h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #ffffff; /* Light text color */
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"],
+.auth-form input[type="email"] {
+  width: calc(100% - 22px); /* Adjusted width to accommodate border */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #555; /* Darker border color */
+  border-radius: 3px;
+  color: #ffffff; /* Light text color */
+  background-color: rgba(0, 0, 0, 0.5); /* Darker background color with some transparency for input fields */
+  transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+.auth-form input[type="text"]:focus,
+.auth-form input[type="password"]:focus,
+.auth-form input[type="email"]:focus {
+  border-color: #ec0216; /* Change border color on focus */
+}
+
+.auth-form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #c93c3c;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.auth-form input[type="submit"]:hover {
+  background-color: #c93c3c;
+}
+
+
+/* Form container */
+.upload-form {
+  width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark background color with some transparency */
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the image */
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1); /* Add a subtle shadow effect */
+  transition: box-shadow 0.3s ease; /* Smooth transition for the shadow */
+}
+
+.upload-form:hover {
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2); /* Darker shadow on hover */
+}
+
+.upload-form h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #ffffff; /* Light text color */
+}
+
+.upload-form input[type="text"],
+.upload-form input[type="password"],
+.upload-form input[type="email"] {
+  width: calc(100% - 22px); /* Adjusted width to accommodate border */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #555; /* Darker border color */
+  border-radius: 3px;
+  color: #ffffff; /* Light text color */
+  background-color: rgba(0, 0, 0, 0.5); /* Darker background color with some transparency for input fields */
+  transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+.upload-form .form-fields-container {
+  margin-bottom: 20px;
+}
+
+.upload-form input[type="text"]:focus,
+.upload-form input[type="password"]:focus,
+.upload-form input[type="email"]:focus {
+  border-color: #ec0216; /* Change border color on focus */
+}
+
+.upload-form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #c93c3c;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.upload-form input[type="submit"]:hover {
+  background-color: #c93c3c;
+}
+
+

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main_content %}
+<section id="register-page" class="content auth" style="background-image: url('{% static 'images/banner2.jpg' %}'); background-size: cover; background-position: center;">
+  <h1 align="center">Profile Details</h1>
+  <div class="info-section">
+    <div class="profile-header" align="center">
+      {% if not user.skylarkuser.profile_picture %}
+        <img class="profile-img" src="{% static 'icon/default_user.jpg' %}" alt="Default Profile" width="300"/>
+      {% else %}
+        <img class="profile-img" src="{{ user.skylarkuser.profile_picture }}" alt="Profile Picture" width="300"/>
+      {% endif %}
+      <h5>{{ user.first_name }} {{ user.last_name }}</h5>
+      <ul>
+        <li>Username: {{ user.username }}</li>
+        <li>Email: {{ user.email }}</li>
+        <li>Age: {{ user.skylarkuser.age }} years old</li>
+        <li>Country: {{ user.skylarkuser.country }}</li>
+        <li>City: {{ user.skylarkuser.city }}</li>
+        <li>Biography: {{ user.skylarkuser.bio }}</li>
+      </ul>
+      <div class="button-99">
+        <a href="{% url 'edit_profile' %}" class="edit-button">Edit</a>
+      </div>
+      <div class="button-99">
+        <a href="{% url 'delete_profile' %}" class="delete-button">Delete</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

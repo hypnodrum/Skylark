@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+  <script src="https://unpkg.com/wavesurfer.js@7"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block main_content %}
+    <!-- headlines -->
+    <br>
+    <section id="index-headline">
+        <div class="index-message">
+            <h1 align="center">Dashboard</h1>
+            <h3 align="center">Total Tracks: {{ tracks.count }}</h3>
+        </div>
+    </section>
+
+    {% if not tracks %}
+        <p class="no-tracks">No tracks yet</p>
+    {% else %}
+        {% for track in tracks %}
+            <div class="track-details-card" >
+                <h1>{{ track.title }}</h1>
+                <div class="row">
+                    <div class="image-wrap">
+                        {% if track.cover %}
+                            <img src="{{ track.cover.url }}" alt="{{ track.title }}">
+                        {% else %}
+                            <img src="{% static 'icon/track_default.png' %}" alt="{{ track.title }}">
+                        {% endif %}
+                    </div>
+                    <div class="waveform-container" id="waveform-{{ track.pk }}"></div>
+                </div>
+
+                <div class="container">
+                    <div class="button-group">
+                        {% if request.user == track.user %}
+                            <div class="button-33">
+                                <a href="#" onclick="share()">Share</a>
+                                <p class="top">Share it</p>
+                                <p class="bottom">to the World</p>
+                            </div>
+                            <div class="button-33">
+                                <a href="{% url 'track_details' pk=track.pk %}">Details</a>
+                                <p class="top">View more</p>
+                                <p class="bottom">info about the track</p>
+                            </div>
+                        {% else %}
+                            <div class="button-33" >
+                                <a href="#" onclick="share()">Share</a>
+                                <p class="top">Share it</p>
+                                <p class="bottom">To the World</p>
+                            </div>
+                            {% if not request.user in track.user_of_likes.all %}
+                                <div class="button-33">
+                                    <a href="{% url 'increase_likes' pk=track.pk %}">Like</a>
+                                    <p class="top">like it?</p>
+                                    <p class="bottom">click</p>
+                                </div>
+                            {% else %}
+                                <div class="button-34">
+                                    <a href="#">Liked it</a>
+                                    <p class="top">You have</p>
+                                    <p class="bottom">liked it</p>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                        <div class="controls">
+                            <button class="play-pause-button" data-track="{{ track.pk }}"><i class="fa fa-play"></i></button>
+                            <button class="stop-button" data-track="{{ track.pk }}"><i class="fa fa-stop"></i></button>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.5" data-track="{{ track.pk }}">
+                        </div>
+                        <div class="info-row">
+                            <p>Genre: {{ track.genre }}</p>
+                            <p>Plays: {{ track.plays_count }}</p>
+                            <p>Downloads: {{ track.download }}</p>
+                            <p>Likes: {{ track.likes_count }}</p>
+                        </div>
+                    </div>
+                </div>
+                <script type="module">
+                    import WaveSurfer from 'https://cdn.jsdelivr.net/npm/wavesurfer.js@7/dist/wavesurfer.esm.js';
+
+                    // Get the track URL from Django template context
+                    const trackUrl = "{% url 'get_all_track' pk=track.pk %}";
+
+                    const wavesurfer = WaveSurfer.create({
+                        container: '#waveform-{{ track.pk }}',
+                        waveColor: '#4F4A85',
+                        progressColor: '#c93c3c',
+                        barWidth: 2, // Adjust waveform bar width as needed
+                        barGap: null, // Remove gaps between waveform bars
+                    });
+
+                    wavesurfer.load(trackUrl); // Load the track URL
+
+                    // Play the audio when the waveform is interacted with
+                    wavesurfer.on('interaction', () => {
+                        wavesurfer.play();
+                    });
+
+                    // Get the play/pause button element
+                    const playPauseButton = document.querySelector('.play-pause-button[data-track="{{ track.pk }}"]');
+
+                    playPauseButton.addEventListener('click', () => {
+                        if (wavesurfer.isPlaying()) {
+                            wavesurfer.pause();
+                            playPauseButton.textContent = "▶"; // Change button text to "Play" when paused
+                        } else {
+                            wavesurfer.play();
+                            playPauseButton.textContent = "||"; // Change button text to "Pause" when playing
+                        }
+                    });
+                    // Get the stop button element
+                    const stopButton = document.querySelector('.stop-button[data-track="{{ track.pk }}"]');
+                    stopButton.addEventListener('click', () => {
+                        wavesurfer.stop();
+                    });
+
+                    // Get the volume slider element
+                    const volumeSlider = document.querySelector('.volume-slider[data-track="{{ track.pk }}"]');
+                    volumeSlider.addEventListener('input', (event) => {
+                        wavesurfer.setVolume(event.target.value);
+                    });
+                </script>
+                <script>
+                    function share() {
+                        var shareUrl = "{{ share_url }}";
+                        navigator.clipboard.writeText(shareUrl).then(function() {
+                            alert("Track link copied to clipboard!");
+                        }, function() {
+                            alert("Failed to copy track link to clipboard!");
+                        });
+                    }
+                </script>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
