@@ -1,8 +1,8 @@
 # S K Y L A R K
- a music site to share creations to the World
+ a music site to share you electronic creations with the World
 
-<h2>This a project for my Final Exam at SotUni Software University.</h2>
-<h2>It's about a site where DJ and Producers may share thir electronic creations to the World.</h2> 
+This a project for my Final Exam at SotUni Software University.
+It's about a site where DJ and Producers may share thir electronic creations to the World.
 
 <h3>Some screenshots from the project:</h3>
 
