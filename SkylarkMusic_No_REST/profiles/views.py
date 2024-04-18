@@ -30,7 +30,7 @@ class CreateProfileView(CreateView):
 
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
-    model = get_user_model()
+    model = User
     template_name = 'profiles/details_profile.html'
     context_object_name = 'user'
 
