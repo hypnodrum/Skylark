@@ -3,10 +3,10 @@ Welcome to a music site where you can share your electronic creations with the w
 
 This is a project for my Final Exam at SoftUni Software University. It's about a site where DJs and producers can share their electronic creations with the world. The site includes the following functionalities:
 
-Dashboard: where all tracks except private ones are visible.
-Catalogue: a private area for users where they have access to CRUD operations for all their tracks, as well as the option to set chosen tracks to private.
-User profile details.
-The site uses waveform graphics for tracks, similar to SoundCloud.
+1. Dashboard: where all tracks except private ones are visible.
+2. Catalogue: a private area for users where they have access to CRUD operations for all their tracks, as well as the option to set chosen tracks to private.
+3. User profile details.
+4. The site uses waveform graphics for tracks, similar to SoundCloud.
 
 <h3>Some screenshots from the project:</h3>
 
