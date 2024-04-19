@@ -16,10 +16,6 @@ class CatalogueView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         tracks = super().get_queryset().filter(user=self.request.user).order_by('id')
-        liked_tracks = self.request.user.likes_of_tracks.all()
-        track_likes = {track.id: track in liked_tracks for track in tracks}
-        for track in tracks:
-            track.liked_by_user = track_likes.get(track.id, False)
         return tracks
 
 
