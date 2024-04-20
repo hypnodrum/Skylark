@@ -1,5 +1,5 @@
 from django.urls import path
-from SkylarkMusic_No_REST.web.views import index, custom_404_view, DashboardView, about, contact
+from SkylarkMusic_No_REST.web.views import index, DashboardView, about, contact, custom_403_view, custom_404_view
 
 urlpatterns = (
     path("", index, name="index"),
@@ -9,4 +9,5 @@ urlpatterns = (
 
 )
 
-handler404 = custom_404_view
+handler404 = custom_403_view
+handler403 = custom_404_view
