@@ -52,7 +52,7 @@
                     import WaveSurfer from 'https://cdn.jsdelivr.net/npm/wavesurfer.js@7/dist/wavesurfer.esm.js';
 
                     // Get the track URL from Django template context
-                    const trackUrl = "{% url 'get_track' pk=track.pk %}";
+                    const trackUrl = "{% url 'get_all_track' pk=track.pk %}";
 
                     const wavesurfer = WaveSurfer.create({
                         container: '#waveform-{{ track.pk }}',
@@ -66,6 +66,24 @@
 
                     // Play the audio when the waveform is interacted with
                     wavesurfer.on('interaction', () => {
+                        // Send a request to increase the play count
+                        fetch("{% url 'increase_play_count' pk=track.pk %}", {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token if CSRF protection is enabled
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Failed to increase play count');
+                            }
+                            return response.json();
+                        })
+                        .catch(error => {
+                            console.error(error);  // Log error or handle accordingly
+                        });
+
                         wavesurfer.play();
                     });
 
@@ -77,10 +95,29 @@
                             wavesurfer.pause();
                             playPauseButton.textContent = "▶"; // Change button text to "Play" when paused
                         } else {
+                            // Send a request to increase the play count
+                            fetch("{% url 'increase_play_count' pk=track.pk %}", {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token if CSRF protection is enabled
+                                    'Content-Type': 'application/json'
+                                }
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Failed to increase play count');
+                                }
+                                return response.json();
+                            })
+                            .catch(error => {
+                                console.error(error);  // Log error or handle accordingly
+                            });
+
                             wavesurfer.play();
                             playPauseButton.textContent = "||"; // Change button text to "Pause" when playing
                         }
                     });
+
                     // Get the stop button element
                     const stopButton = document.querySelector('.stop-button[data-track="{{ track.pk }}"]');
                     stopButton.addEventListener('click', () => {
@@ -92,9 +129,8 @@
                     volumeSlider.addEventListener('input', (event) => {
                         wavesurfer.setVolume(event.target.value);
                     });
-                </script>
 
-                <script>
+                    // Function to share the track link
                     function share() {
                         var shareUrl = "{{ share_url }}";
                         navigator.clipboard.writeText(shareUrl).then(function() {
