@@ -74,7 +74,6 @@ def get_track(request, pk):
     track = get_object_or_404(Track, pk=pk)
 
     if request.user.is_authenticated and request.user == track.user:
-        track.increase_play_count()  # Increase play count when the track is accessed
         return FileResponse(open(track.file.path, 'rb'), content_type='audio/mpeg')
     else:
         return HttpResponseForbidden("You do not have permission to access this track.")
@@ -83,12 +82,18 @@ def get_track(request, pk):
 def get_all_track(request, pk):
     track = get_object_or_404(Track, pk=pk)
 
-    if request.user == track.user or not track.private:
-        track.increase_play_count()  # Increase play count when the track is accessed
+    if request.user.is_authenticated and not track.private:
         return FileResponse(open(track.file.path, 'rb'), content_type='audio/mpeg')
     else:
         # If the track is private and the user is not the owner, return a 403 Forbidden response
         return HttpResponseForbidden("You are not authorized to access this track.")
+
+
+def increase_play_count(request, pk):
+    track = get_object_or_404(Track, pk=pk)
+    track.increase_play_count()
+    return JsonResponse({'status': 'success'})
+
 
 
 def download_track(request, pk):
