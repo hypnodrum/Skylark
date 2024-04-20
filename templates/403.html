@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main_content %}
+
+<body>
+    <br>
+    <div style="text-align: center;">
+        <h2>Sorry, you don't have permission to access this page.</h2>
+        <img class="image-404" src="{% static 'images/403.jpg' %}" alt=""/>
+    </div>
+</body>
+
+{% endblock %}
