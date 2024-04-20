@@ -25,6 +25,10 @@ def custom_404_view(request, exception=None):
     return render(request, '404.html', status=404)
 
 
+def custom_403_view(request, exception=None):
+    return render(request, '403.html', status=403)
+
+
 class DashboardView(LoginRequiredMixin, ListView):
     model = Track
     template_name = 'web/dashboard.html'
