@@ -42,7 +42,7 @@ class TrackDetailView(LoginRequiredMixin, DetailView):
     def dispatch(self, request, *args, **kwargs):
         track = self.get_object()
         if request.user != track.user:
-            return HttpResponseForbidden()
+            return render(request, '403.html', status=403)
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -60,7 +60,7 @@ class TrackEditView(LoginRequiredMixin, UpdateView):
     def dispatch(self, request, *args, **kwargs):
         track = self.get_object()
         if request.user != track.user:
-            return HttpResponseForbidden()
+            return render(request, '403.html', status=403)
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -118,4 +118,4 @@ def search_view(request):
         else:
             raise Http404("No search query provided.")
     else:
-        return render(request, '404.html', status=404)
+        return render(request, '403.html', status=403)
