@@ -8,6 +8,7 @@ urlpatterns = [
     path("track_details/<int:pk>/", TrackDetailView.as_view(), name="track_details"),
     path("get_track/<int:pk>/", get_track, name="get_track"),
     path("get_all_track/<int:pk>/", get_all_track, name="get_all_track"),
+    path("increase_play_count/<int:pk>/", increase_play_count, name="increase_play_count"),
     path("download_track/<int:pk>/", download_track, name="download_track"),
     path('increase_likes/<int:pk>/', increase_likes, name='increase_likes'),
     path('edit/<int:pk>/', TrackEditView.as_view(), name='edit_track'),
