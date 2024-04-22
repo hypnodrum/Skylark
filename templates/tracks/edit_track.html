@@ -2,7 +2,7 @@
 {% load static %}
 {% block main_content %}
 <section id="register-page" class="content auth" style="background-image: url('{% static 'images/banner2.jpg' %}'); background-size: cover; background-position: center;">
-  <form action="{% url 'edit_track' pk=track.pk%}" method="post" class="upload-form">
+  <form action="{% url 'edit_track' pk=track.pk%}" method="post" class="upload-form" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="container">
         <div class="brand-logo"></div>
